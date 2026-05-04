@@ -23,6 +23,138 @@
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/animations.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+
+  <style>
+    /* ── Vessel Photo Grid ─────────────────────────────────── */
+    .vessel-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    @media (min-width: 540px) {
+      .vessel-photo-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    }
+    @media (min-width: 1024px) {
+      .vessel-photo-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    }
+
+    .vcard {
+      position: relative;
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .vcard:hover {
+      border-color: var(--gold);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.15);
+    }
+
+    .vcard__image-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .vcard__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .vcard:hover .vcard__image { transform: scale(1.06); }
+
+    .vcard__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,22,40,0)    40%,
+        rgba(10,22,40,0.5)  75%,
+        rgba(10,22,40,0.8)  100%
+      );
+    }
+
+    .vcard__badge {
+      position: absolute;
+      top: 0.875rem;
+      left: 0.875rem;
+      background: rgba(10,22,40,0.82);
+      border: 1px solid rgba(201,168,76,0.5);
+      color: var(--gold);
+      font-family: var(--font-heading);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 2;
+      pointer-events: none;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .vcard:hover .vcard__badge {
+      background: rgba(201,168,76,0.18);
+      border-color: var(--gold);
+    }
+
+    .vcard__body {
+      padding: 1.25rem 1.4rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      border-top: 1px solid var(--border);
+      transition: border-color 0.35s ease;
+    }
+    .vcard:hover .vcard__body { border-top-color: rgba(201,168,76,0.25); }
+
+    .vcard__title {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0;
+    }
+    .vcard__types {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .vcard__desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0.25rem 0 0;
+    }
+
+    .vcard::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .vcard:hover::after { opacity: 1; }
+  </style>
 </head>
 <body>
 
@@ -170,65 +302,107 @@
 </section>
 
 <!-- VESSEL CATEGORIES -->
-<section class="section section--dark" aria-label="Vessel Categories">
+<section class="section section--dark vessel-section" aria-label="Vessel Categories">
   <div class="container">
     <div class="section-header">
-      <span class="section-label" data-aos="fade-up">Vessel Access</span>
-      <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Vessel Categories We Broker</h2>
+      <span class="section-label" data-aos="fade-up">Vessel Expertise</span>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Every Vessel Type, Handled with Expertise</h2>
       <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
-        Access to the full spectrum of commercial shipping tonnage through our global owner network.
+        Access to the full spectrum of commercial shipping tonnage — from handy bulk carriers to VLCCs — through our global owner network.
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;" data-aos="fade-up" data-aos-delay="100">
+    <div class="vessel-photo-grid">
 
-      <div class="icon-card">
-        <div class="icon-card__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l3-8h12l3 8"/><path d="M3 17h18"/><circle cx="7" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
+      <!-- Bulk Carriers -->
+      <article class="vcard" data-aos="fade-up" data-aos-delay="50">
+        <div class="vcard__image-wrap">
+          <img class="vcard__image" src="../assets/images/vessel-bulk-carriers.png"
+               alt="Bulk carrier vessel at sea" loading="lazy">
+          <div class="vcard__overlay" aria-hidden="true"></div>
+          <span class="vcard__badge">Dry Cargo</span>
         </div>
-        <div class="icon-card__title">Bulk Carriers</div>
-        <p class="icon-card__desc">Handysize, Supramax, Ultramax, Panamax, and Capesize vessels. Carrying grain, coal, minerals, fertilizers, and other dry bulk commodities.</p>
-      </div>
+        <div class="vcard__body">
+          <h3 class="vcard__title">Bulk Carriers</h3>
+          <p class="vcard__types">Handysize · Supramax · Ultramax · Panamax · Capesize</p>
+          <p class="vcard__desc">Grain, coal, minerals, fertilizers and other dry bulk commodities — from minor bulks to major ore trades.</p>
+        </div>
+      </article>
 
-      <div class="icon-card">
-        <div class="icon-card__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="8" width="20" height="12" rx="2"/><path d="M6 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><line x1="2" y1="14" x2="22" y2="14"/></svg>
+      <!-- Tankers -->
+      <article class="vcard" data-aos="fade-up" data-aos-delay="100">
+        <div class="vcard__image-wrap">
+          <img class="vcard__image" src="../assets/images/vessel-tankers.png"
+               alt="Product tanker underway" loading="lazy">
+          <div class="vcard__overlay" aria-hidden="true"></div>
+          <span class="vcard__badge">Liquid Cargo</span>
         </div>
-        <div class="icon-card__title">Tankers</div>
-        <p class="icon-card__desc">Product tankers (MR/LR), chemical tankers, crude oil tankers (Aframax, Suezmax, VLCC). Serving refineries and petrochemical plants globally.</p>
-      </div>
+        <div class="vcard__body">
+          <h3 class="vcard__title">Tankers</h3>
+          <p class="vcard__types">MR · LR1 · LR2 · Aframax · Suezmax · VLCC · Chemical</p>
+          <p class="vcard__desc">Product tankers, chemical tankers and crude oil tankers serving refineries and petrochemical plants globally.</p>
+        </div>
+      </article>
 
-      <div class="icon-card">
-        <div class="icon-card__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      <!-- General Cargo / MPP -->
+      <article class="vcard" data-aos="fade-up" data-aos-delay="150">
+        <div class="vcard__image-wrap">
+          <img class="vcard__image" src="../assets/images/vessel-general-cargo.png"
+               alt="General cargo MPP vessel in port" loading="lazy">
+          <div class="vcard__overlay" aria-hidden="true"></div>
+          <span class="vcard__badge">Break Bulk</span>
         </div>
-        <div class="icon-card__title">General Cargo / MPP</div>
-        <p class="icon-card__desc">Multi-purpose and general cargo vessels for break bulk, project cargo, bagged goods, and mixed shipments requiring flexible stowage.</p>
-      </div>
+        <div class="vcard__body">
+          <h3 class="vcard__title">General Cargo / MPP</h3>
+          <p class="vcard__types">Tween-deckers · MPP Vessels · Heavy Lift</p>
+          <p class="vcard__desc">Multi-purpose vessels for break bulk, project cargo, bagged goods and mixed shipments requiring flexible stowage.</p>
+        </div>
+      </article>
 
-      <div class="icon-card">
-        <div class="icon-card__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      <!-- Container Feeders -->
+      <article class="vcard" data-aos="fade-up" data-aos-delay="200">
+        <div class="vcard__image-wrap">
+          <img class="vcard__image" src="../assets/images/vessel-container-feeders.png"
+               alt="Container feeder vessel" loading="lazy">
+          <div class="vcard__overlay" aria-hidden="true"></div>
+          <span class="vcard__badge">Container</span>
         </div>
-        <div class="icon-card__title">Container Feeders</div>
-        <p class="icon-card__desc">Regional and feeder container vessels (100–8,000 TEU) connecting Gulf ports to main hub services across South Asia and East Africa.</p>
-      </div>
+        <div class="vcard__body">
+          <h3 class="vcard__title">Container Feeders</h3>
+          <p class="vcard__types">Regional Feeders · Intra-Gulf · 300–8,000 TEU</p>
+          <p class="vcard__desc">Connecting Gulf ports to main hub services across South Asia and East Africa with speed and reliability.</p>
+        </div>
+      </article>
 
-      <div class="icon-card">
-        <div class="icon-card__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3m0 0h3l3 3v4h-6V8z"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+      <!-- RORO Vessels -->
+      <article class="vcard" data-aos="fade-up" data-aos-delay="250">
+        <div class="vcard__image-wrap">
+          <img class="vcard__image" src="../assets/images/vessel-roro.png"
+               alt="RORO pure car carrier vessel aerial view" loading="lazy">
+          <div class="vcard__overlay" aria-hidden="true"></div>
+          <span class="vcard__badge">RORO</span>
         </div>
-        <div class="icon-card__title">RORO Vessels</div>
-        <p class="icon-card__desc">Roll-on/roll-off vessels for vehicles, machinery, construction equipment, and other wheeled cargo — pure car carriers to heavy equipment transporters.</p>
-      </div>
+        <div class="vcard__body">
+          <h3 class="vcard__title">RORO Vessels</h3>
+          <p class="vcard__types">Pure Car Carriers · RORO/ROLO · Heavy Equipment</p>
+          <p class="vcard__desc">Roll-on/roll-off vessels for vehicles, machinery, construction equipment and other wheeled cargo.</p>
+        </div>
+      </article>
 
-      <div class="icon-card">
-        <div class="icon-card__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <!-- Offshore Support -->
+      <article class="vcard" data-aos="fade-up" data-aos-delay="300">
+        <div class="vcard__image-wrap">
+          <img class="vcard__image" src="../assets/images/vessel-offshore.png"
+               alt="Offshore platform supply vessel" loading="lazy">
+          <div class="vcard__overlay" aria-hidden="true"></div>
+          <span class="vcard__badge">Offshore</span>
         </div>
-        <div class="icon-card__title">Offshore Support</div>
-        <p class="icon-card__desc">Platform Supply Vessels (PSVs), Anchor Handling Tugs (AHTSs), and crew boats servicing oil and gas platforms in the Arabian Gulf.</p>
-      </div>
+        <div class="vcard__body">
+          <h3 class="vcard__title">Offshore Support</h3>
+          <p class="vcard__types">PSV · AHTS · Crew Boats · Construction Support</p>
+          <p class="vcard__desc">Platform supply vessels, anchor handlers and crew boats servicing oil and gas operations in the Arabian Gulf.</p>
+        </div>
+      </article>
 
     </div>
   </div>
