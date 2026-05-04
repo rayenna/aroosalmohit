@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | Aroos al Mohit</title>
+  <meta name="description" content="The page you're looking for has sailed on. Return to Aroos al Mohit — Ship Chartering & Freight Brokerage, Arabian Gulf.">
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Josefin+Sans:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <link rel="stylesheet" href="./assets/css/animations.css">
+  <link rel="stylesheet" href="./assets/css/responsive.css">
+
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.25rem;
+      background: var(--ocean-dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .error-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 80% 80%, rgba(46,144,209,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .error-page__number {
+      font-family: var(--font-mono);
+      font-size: clamp(6rem, 20vw, 14rem);
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(201,168,76,0.3);
+      line-height: 1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .error-page__compass {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 2rem;
+      color: var(--gold);
+      animation: spin-slow 20s linear infinite;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    .error-page__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .error-page__sub {
+      color: var(--muted);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      line-height: 1.75;
+      max-width: 36rem;
+      margin: 0 auto 2.5rem;
+    }
+    .error-page__btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .error-page__links {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .error-page__links a {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .error-page__links a:hover { color: var(--gold); }
+    .error-page__wave-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.5rem auto;
+    }
+    .error-logo {
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+
+<div class="error-page">
+
+  <a href="./index.html" class="error-logo" aria-label="Aroos al Mohit — Home">
+    <img src="./assets/images/logo.png" alt="Aroos al Mohit" height="44">
+  </a>
+
+  <svg class="error-page__compass" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+    <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+    <circle cx="50" cy="50" r="36" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+    <circle cx="50" cy="50" r="4" fill="currentColor"/>
+    <!-- N marker -->
+    <polygon points="50,8 46,26 50,22 54,26" fill="currentColor"/>
+    <!-- S marker -->
+    <polygon points="50,92 54,74 50,78 46,74" fill="rgba(255,255,255,0.3)"/>
+    <!-- E marker -->
+    <polygon points="92,50 74,46 78,50 74,54" fill="rgba(255,255,255,0.3)"/>
+    <!-- W marker -->
+    <polygon points="8,50 26,54 22,50 26,46" fill="rgba(255,255,255,0.3)"/>
+    <text x="50" y="4" text-anchor="middle" font-family="monospace" font-size="7" fill="currentColor" font-weight="bold">N</text>
+  </svg>
+
+  <div class="error-page__number" aria-hidden="true">404</div>
+
+  <h1 class="error-page__title">You've Drifted Off Course</h1>
+
+  <div class="error-page__wave-divider" aria-hidden="true"></div>
+
+  <p class="error-page__sub">
+    The page you're looking for has sailed on. Let us help you navigate back to the right waters.
+  </p>
+
+  <div class="error-page__btns">
+    <a href="./index.html" class="btn btn-primary btn-lg">Return to Homepage →</a>
+    <a href="./contact.html" class="btn btn-outline">Contact Us</a>
+  </div>
+
+  <nav class="error-page__links" aria-label="Quick links">
+    <a href="./services/chartering.html">Ship Chartering</a>
+    <a href="./services/freight-brokerage.html">Freight Brokerage</a>
+    <a href="./services/advisory.html">Maritime Advisory</a>
+    <a href="./fleet.html">Fleet</a>
+    <a href="./about.html">About</a>
+  </nav>
+
+</div>
+
+</body>
+</html>

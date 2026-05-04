@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleet Overview | Aroos al Mohit — Every Vessel Type, Every Trade</title>
+  <meta name="description" content="Aroos al Mohit brokers across the full commercial fleet — bulk carriers, tankers, general cargo, container feeders and offshore vessels. Every vessel type, every trade.">
+  <link rel="canonical" href="https://aroosalmohit.com/fleet.html">
+
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Fleet Overview — Aroos al Mohit">
+  <meta property="og:description" content="We broker across the full commercial fleet — from small handy bulk carriers to VLCCs — across every major shipping market.">
+  <meta property="og:url"         content="https://aroosalmohit.com/fleet.html">
+  <meta property="og:image"       content="https://aroosalmohit.com/assets/images/og-image.jpg">
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Josefin+Sans:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <link rel="stylesheet" href="./assets/css/animations.css">
+  <link rel="stylesheet" href="./assets/css/responsive.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+  <style>
+    .vessel-card {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .vessel-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .vessel-card__image {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .vessel-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .vessel-card:hover .vessel-card__image img { transform: scale(1.05); }
+    .vessel-card__badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: rgba(10,22,40,0.85);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      backdrop-filter: blur(4px);
+    }
+    .vessel-card__body { padding: 1.75rem; }
+    .vessel-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .vessel-card__desc { color: var(--muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1.25rem; }
+    .vessel-card__specs { display: flex; flex-direction: column; gap: 0.5rem; }
+    .vessel-spec { display: flex; gap: 0.5rem; font-size: 0.8rem; }
+    .vessel-spec__label { color: var(--gold); font-family: var(--font-heading); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; min-width: 6rem; flex-shrink: 0; }
+    .vessel-spec__value { color: var(--muted); }
+    .vessel-subcats { margin: 1rem 0; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: var(--radius); }
+    .vessel-subcats li { color: var(--muted); font-size: 0.85rem; line-height: 1.8; list-style: none; padding-left: 1.25rem; position: relative; }
+    .vessel-subcats li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+    .vessel-subcats strong { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="./index.html" class="nav__logo" aria-label="Aroos al Mohit — Home">
+        <img src="./assets/images/logo.png" alt="Aroos al Mohit" height="44">
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="./index.html"  class="nav__link">Home</a></li>
+        <li><a href="./about.html"  class="nav__link">About</a></li>
+        <li class="nav__dropdown">
+          <button class="nav__link nav__dropdown-toggle" aria-haspopup="true">
+            Services
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="nav__dropdown-menu" role="list">
+            <li><a href="./services/chartering.html"        class="nav__dropdown-item">Ship Chartering</a></li>
+            <li><a href="./services/freight-brokerage.html" class="nav__dropdown-item">Freight Brokerage</a></li>
+            <li><a href="./services/advisory.html"          class="nav__dropdown-item">Maritime Advisory</a></li>
+          </ul>
+        </li>
+        <li><a href="./fleet.html"   class="nav__link active">Fleet</a></li>
+        <li><a href="./contact.html" class="nav__link">Contact</a></li>
+      </ul>
+      <a href="./contact.html" class="btn btn-primary btn-sm nav__cta">Request a Quote</a>
+      <button class="nav__hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile" role="dialog" aria-label="Mobile navigation">
+  <a href="./index.html"  class="nav__mobile-link">Home</a>
+  <a href="./about.html"  class="nav__mobile-link">About</a>
+  <a href="./services/chartering.html"        class="nav__mobile-sub">Ship Chartering</a>
+  <a href="./services/freight-brokerage.html" class="nav__mobile-sub">Freight Brokerage</a>
+  <a href="./services/advisory.html"          class="nav__mobile-sub">Maritime Advisory</a>
+  <a href="./fleet.html"   class="nav__mobile-link" style="color:var(--gold)">Fleet</a>
+  <a href="./contact.html" class="nav__mobile-link">Contact</a>
+  <a href="./contact.html" class="btn btn-primary nav__mobile-cta">Request a Quote</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero" aria-label="Fleet Expertise">
+  <div class="page-hero__bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80"
+         alt="" loading="eager" style="width:100%;height:100%;object-fit:cover;opacity:0.25;">
+  </div>
+  <div class="container">
+    <div class="page-hero__content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="./index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
+        <span class="breadcrumb__current">Fleet Overview</span>
+      </nav>
+      <span class="page-hero__eyebrow" data-aos="fade-up">Fleet Expertise</span>
+      <h1 class="page-hero__title" data-aos="fade-up">Every Vessel Type.<br>Every Trade.</h1>
+      <p class="page-hero__sub" data-aos="fade-up" data-aos-delay="150">
+        We broker across the full commercial fleet — from small handy bulk carriers to VLCCs — across every major shipping market.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- VESSEL CATEGORIES -->
+<section class="section section--dark" aria-label="Vessel Categories">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label" data-aos="fade-up">Vessel Categories</span>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Our Vessel Expertise</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+        Six vessel categories. Every commercial trade. Deep expertise in each.
+      </p>
+    </div>
+
+    <div class="grid-2" style="gap:2rem;" data-aos="fade-up">
+
+      <!-- Bulk Carriers -->
+      <div class="vessel-card">
+        <div class="vessel-card__image">
+          <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80"
+               alt="Bulk carrier at sea" loading="lazy">
+          <span class="vessel-card__badge">Dry Cargo</span>
+        </div>
+        <div class="vessel-card__body">
+          <div class="vessel-card__title">Bulk Carriers</div>
+          <p class="vessel-card__desc">
+            The workhorses of global dry cargo trade. We broker bulk carriers across every size category, from small Handysize vessels suited to congested ports and minor bulk trades, to giant Capesize ships moving iron ore and coal at scale.
+          </p>
+          <ul class="vessel-subcats">
+            <li><strong>Handysize</strong> (25,000–40,000 DWT) — Bagged goods, minor bulks, fertilizers, regional trade</li>
+            <li><strong>Handymax / Supramax / Ultramax</strong> (40,000–65,000 DWT) — Grain, fertilizers, coal, agri-products</li>
+            <li><strong>Panamax / Post-Panamax</strong> (65,000–100,000 DWT) — Coal, grain, phosphate, bulk trade</li>
+            <li><strong>Capesize</strong> (100,000+ DWT) — Iron ore, coal, bauxite, large bulk trades</li>
+          </ul>
+          <div class="vessel-card__specs">
+            <div class="vessel-spec">
+              <span class="vessel-spec__label">Commodities</span>
+              <span class="vessel-spec__value">Grain, coal, iron ore, fertilizers, cement, clinker, bauxite, gypsum, sugar, salt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product & Chemical Tankers -->
+      <div class="vessel-card">
+        <div class="vessel-card__image">
+          <img src="https://images.unsplash.com/photo-1519430044529-9532b88c8e58?w=800&q=80"
+               alt="Product tanker at sea" loading="lazy">
+          <span class="vessel-card__badge">Liquid Cargo</span>
+        </div>
+        <div class="vessel-card__body">
+          <div class="vessel-card__title">Product & Chemical Tankers</div>
+          <p class="vessel-card__desc">
+            Clean and dirty product tankers for the transportation of refined petroleum products, vegetable oils, and IMO-classified chemicals. Active in the Arabian Gulf, Indian Ocean and East African product tanker markets.
+          </p>
+          <ul class="vessel-subcats">
+            <li><strong>MR Tankers</strong> (25,000–55,000 DWT) — Clean petroleum products, vegetable oils, chemicals</li>
+            <li><strong>LR1 / LR2</strong> (55,000–110,000 DWT) — Naphtha, jet fuel, gasoil, fuel oil</li>
+            <li><strong>Chemical Tankers</strong> (5,000–40,000 DWT) — IMO II & III chemicals, specialty liquids</li>
+          </ul>
+          <div class="vessel-card__specs">
+            <div class="vessel-spec">
+              <span class="vessel-spec__label">Commodities</span>
+              <span class="vessel-spec__value">Gasoil, jet fuel, naphtha, palm oil, sunflower oil, molasses, chemicals</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crude Oil Tankers -->
+      <div class="vessel-card">
+        <div class="vessel-card__image">
+          <img src="https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=800&q=80"
+               alt="Crude oil tanker VLCC" loading="lazy">
+          <span class="vessel-card__badge">Crude Oil</span>
+        </div>
+        <div class="vessel-card__body">
+          <div class="vessel-card__title">Crude Oil Tankers</div>
+          <p class="vessel-card__desc">
+            For the movement of crude oil from producing regions to refineries worldwide. We broker across Aframax, Suezmax and VLCC segments for clients with crude oil and fuel oil requirements.
+          </p>
+          <ul class="vessel-subcats">
+            <li><strong>Aframax</strong> (80,000–120,000 DWT)</li>
+            <li><strong>Suezmax</strong> (120,000–200,000 DWT)</li>
+            <li><strong>VLCC</strong> (200,000–320,000 DWT)</li>
+          </ul>
+          <div class="vessel-card__specs">
+            <div class="vessel-spec">
+              <span class="vessel-spec__label">Trades</span>
+              <span class="vessel-spec__value">Arabian Gulf exports, Indian Ocean crude flows, East African crude</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- General Cargo & MPP -->
+      <div class="vessel-card">
+        <div class="vessel-card__image">
+          <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5716d?w=800&q=80"
+               alt="General cargo vessel port" loading="lazy">
+          <span class="vessel-card__badge">General Cargo</span>
+        </div>
+        <div class="vessel-card__body">
+          <div class="vessel-card__title">General Cargo & MPP Vessels</div>
+          <p class="vessel-card__desc">
+            Multipurpose and general cargo vessels are the most versatile workhorses in the fleet — capable of carrying breakbulk, bagged goods, steel, timber, machinery, and project cargo in a single hold configuration.
+          </p>
+          <ul class="vessel-subcats">
+            <li>Tween-deck and single-deck configurations</li>
+            <li>Onboard cranes (typically 25–500 MT SWL)</li>
+            <li>Box-shaped holds for maximum stowage efficiency</li>
+            <li>Heavy lift capability on specialist units</li>
+          </ul>
+          <div class="vessel-card__specs">
+            <div class="vessel-spec">
+              <span class="vessel-spec__label">Commodities</span>
+              <span class="vessel-spec__value">Steel products, timber, bagged rice/cement, machinery, vehicles, project cargo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Container Feeders -->
+      <div class="vessel-card">
+        <div class="vessel-card__image">
+          <img src="https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?w=800&q=80"
+               alt="Container feeder vessel" loading="lazy">
+          <span class="vessel-card__badge">Container</span>
+        </div>
+        <div class="vessel-card__body">
+          <div class="vessel-card__title">Container Feeders</div>
+          <p class="vessel-card__desc">
+            Regional container feeder vessels connecting secondary ports to mainline services — or providing direct port-to-port container services across the Gulf, Indian Ocean and East Africa.
+          </p>
+          <ul class="vessel-subcats">
+            <li><strong>Small Feeders</strong> 300–1,000 TEU — Intra-Gulf, short-sea services</li>
+            <li><strong>Regional Feeders</strong> 1,000–3,000 TEU — Gulf–India, Gulf–East Africa</li>
+          </ul>
+          <div class="vessel-card__specs">
+            <div class="vessel-spec">
+              <span class="vessel-spec__label">Services</span>
+              <span class="vessel-spec__value">Intra-Gulf, Gulf–India, Gulf–East Africa, Gulf–Red Sea</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offshore Support -->
+      <div class="vessel-card">
+        <div class="vessel-card__image">
+          <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80"
+               alt="Offshore support vessel" loading="lazy">
+          <span class="vessel-card__badge">Offshore</span>
+        </div>
+        <div class="vessel-card__body">
+          <div class="vessel-card__title">Offshore Support Vessels</div>
+          <p class="vessel-card__desc">
+            Platform supply vessels (PSV), anchor handling tug supply vessels (AHTS), and crew boats supporting the oil and gas sector across the Arabian Gulf and beyond.
+          </p>
+          <ul class="vessel-subcats">
+            <li><strong>PSV</strong> — Platform Supply Vessels</li>
+            <li><strong>AHTS</strong> — Anchor Handling Tug Supply</li>
+            <li><strong>Crew Boats</strong> — Fast crew transfer</li>
+            <li>Work Barges, Accommodation Vessels, Construction Support</li>
+          </ul>
+          <div class="vessel-card__specs">
+            <div class="vessel-spec">
+              <span class="vessel-spec__label">Operations</span>
+              <span class="vessel-spec__value">Oil & gas field supply, construction, offshore installation support</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VESSEL TABLE SUMMARY -->
+<section class="section section--navy" aria-label="Vessel Summary Table">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label" data-aos="fade-up">Quick Reference</span>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Vessel Type Summary</h2>
+    </div>
+    <div class="table-wrapper" data-aos="fade-up">
+      <table class="charter-table">
+        <thead>
+          <tr>
+            <th>Vessel Type</th>
+            <th>DWT / Size Range</th>
+            <th>Typical Trades</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bulk Carrier</td>
+            <td>25,000 – 400,000 DWT</td>
+            <td>Grain, coal, minerals, fertilizers</td>
+          </tr>
+          <tr>
+            <td>Product Tanker</td>
+            <td>10,000 – 75,000 DWT</td>
+            <td>Refined petroleum, vegetable oils, chemicals</td>
+          </tr>
+          <tr>
+            <td>Crude Tanker</td>
+            <td>80,000 – 320,000 DWT</td>
+            <td>Crude oil, fuel oil</td>
+          </tr>
+          <tr>
+            <td>General Cargo / MPP</td>
+            <td>3,000 – 30,000 DWT</td>
+            <td>Steel, project cargo, bagged goods</td>
+          </tr>
+          <tr>
+            <td>Container Feeder</td>
+            <td>300 – 3,000 TEU</td>
+            <td>Containerized goods, intraregional</td>
+          </tr>
+          <tr>
+            <td>Offshore Support</td>
+            <td>Variable</td>
+            <td>Oil & gas field supply, construction</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- BESPOKE CTA -->
+<section class="cta-banner" aria-label="Bespoke Vessel CTA">
+  <div class="container">
+    <div class="cta-banner__content">
+      <h2 class="cta-banner__title">Have a Specific Vessel Requirement?</h2>
+      <p class="cta-banner__sub">
+        If you need a vessel type not listed here — a dredger, a livestock carrier, a harbour tug — get in touch. Our network is broad, and we'll find what you need.
+      </p>
+      <div class="cta-banner__btns">
+        <a href="./contact.html" class="btn btn-gold btn-lg">Contact Our Team →</a>
+        <a href="./services/chartering.html" class="btn btn-outline">Ship Chartering →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="footer__wave wave-container" aria-hidden="true">
+    <svg class="wave-svg" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1380,20 1440,40 L1440,80 L0,80 Z" fill="#0D2137"/>
+    </svg>
+  </div>
+  <div class="footer__main">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo"><img src="./assets/images/logo.png" alt="Aroos al Mohit" height="52"></div>
+          <p class="footer__tagline">Aroos al Mohit is a specialist ship chartering intermediary and freight brokerage serving cargo owners, traders and shipowners across the Middle East, Indian Ocean and global markets.</p>
+          <div class="footer__socials">
+            <a href="https://wa.me/971559525691" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer__heading">Services</h3>
+          <ul class="footer__links">
+            <li><a href="./services/chartering.html"        class="footer__link">Ship Chartering</a></li>
+            <li><a href="./services/freight-brokerage.html" class="footer__link">Freight Brokerage</a></li>
+            <li><a href="./services/advisory.html"          class="footer__link">Maritime Advisory</a></li>
+            <li><a href="./fleet.html"                      class="footer__link">Fleet Overview</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__heading">Company</h3>
+          <ul class="footer__links">
+            <li><a href="./about.html"   class="footer__link">About Us</a></li>
+            <li><a href="./fleet.html"   class="footer__link">Vessel Types</a></li>
+            <li><a href="./contact.html" class="footer__link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__heading">Get in Touch</h3>
+          <ul class="footer__links">
+            <li><a href="mailto:business@aroosalmohit.com" class="footer__link">business@aroosalmohit.com</a></li>
+            <li><a href="tel:+971559525691"                class="footer__link">+971 55 952 5691</a></li>
+            <li><a href="https://wa.me/971559525691" target="_blank" rel="noopener noreferrer" class="footer__link">WhatsApp Us</a></li>
+            <li class="footer__link" style="cursor:default;">Deira, Dubai, UAE</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <p class="footer__copy">© 2025 Aroos al Mohit. All rights reserved. | Ship Chartering & Freight Brokerage</p>
+      <p class="footer__copy" style="font-size:0.75rem;margin-top:0.25rem;color:var(--muted);">
+        <span lang="ar" dir="rtl">عروس المحيط</span> — Bride of the Ocean · Ship Chartering · Freight Brokerage · Maritime Advisory
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/971559525691?text=Hello%2C%20I%20have%20a%20maritime%20enquiry."
+   class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="./assets/js/main.js"></script>
+</body>
+</html>
