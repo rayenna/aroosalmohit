@@ -30,6 +30,7 @@
     hamburger.addEventListener('click', () => {
       const isOpen = hamburger.classList.toggle('active');
       mobileNav.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
@@ -38,8 +39,19 @@
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       });
+    });
+
+    // Close on outside tap (mobile)
+    mobileNav.addEventListener('click', (e) => {
+      if (e.target === mobileNav) {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
     });
   }
 })();
