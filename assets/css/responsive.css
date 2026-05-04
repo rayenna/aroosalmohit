@@ -1,0 +1,150 @@
+/* ==========================================================================
+   AROOS AL MOHIT — Responsive Stylesheet
+   Mobile-first approach: base = mobile, then scale up
+   Breakpoints: 640px (sm) | 768px (md/tablet) | 1024px (lg/desktop) | 1280px (xl)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Extra small / base mobile adjustments (<= 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .container { padding: 0 1.25rem; }
+
+  .section { padding: 4rem 0; }
+
+  .hero__title { font-size: 2.2rem; }
+  .hero__subtitle { font-size: 0.95rem; }
+  .hero__ctas { flex-direction: column; align-items: flex-start; }
+
+  .stats__grid { grid-template-columns: repeat(2, 1fr); }
+  .stats__item:nth-child(2)::after { display: none; }
+  .stats__item:nth-child(3)::after { display: none; }
+
+  .timeline { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .timeline::before { display: none; }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .cta-banner { padding: 3.5rem 0; }
+
+  .footer__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; }
+  .footer__bottom-links { flex-wrap: wrap; gap: 1rem; }
+
+  .whatsapp-float { bottom: 1.25rem; right: 1.25rem; width: 48px; height: 48px; }
+
+  .team-grid { grid-template-columns: 1fr; }
+  .icon-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* --------------------------------------------------------------------------
+   Small (640px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+
+  .page-hero__title { font-size: 2.25rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Tablet (768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Nav */
+  .nav__links { display: none; }
+  .nav__cta { display: none; }
+  .nav__hamburger { display: flex; }
+  .nav__mobile { display: flex; }
+
+  /* Hero */
+  .hero__bg { background-attachment: scroll; }
+  .hero__content { max-width: 100%; }
+
+  /* Stats */
+  .stats__grid { grid-template-columns: repeat(2, 1fr); }
+  .stats__item:nth-child(even)::after { display: none; }
+
+  /* Services grid */
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .grid-3 > *:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 400px; margin: 0 auto; }
+
+  /* Why blocks */
+  .why-block,
+  .why-block.reverse { grid-template-columns: 1fr; gap: 2.5rem; direction: ltr; }
+  .why-block.reverse > * { direction: ltr; }
+  .why-block.reverse .why-block__image { order: -1; }
+
+  /* Timeline */
+  .timeline {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 1.5rem;
+  }
+  .timeline::before { display: none; }
+
+  /* Team grid */
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Icon grid */
+  .icon-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  /* Footer */
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .footer__brand { grid-column: 1 / -1; }
+
+  /* Charter table — scrollable */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+  .charter-table { min-width: 580px; }
+}
+
+/* --------------------------------------------------------------------------
+   Desktop (1024px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .section { padding: 7rem 0; }
+  .container { padding: 0 3rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Wide (1280px+)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1280px) {
+  .container { padding: 0 2rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Large (1440px+)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1440px) {
+  :root { --max-width: 1360px; }
+  .hero__title { font-size: 5.5rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Print
+   -------------------------------------------------------------------------- */
+@media print {
+  .nav, .whatsapp-float, .scroll-progress, .hero__scroll { display: none; }
+  body { background: white; color: black; }
+  a { color: inherit; }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero__bg { background-attachment: scroll; }
+}
