@@ -5,6 +5,12 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   Base mobile — table scroll always available, regardless of breakpoint
+   -------------------------------------------------------------------------- */
+.table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.charter-table { min-width: 560px; }
+
+/* --------------------------------------------------------------------------
    480px — Small mobile
    -------------------------------------------------------------------------- */
 @media (min-width: 480px) {
@@ -43,11 +49,12 @@
   .section { padding: 5.5rem 0; }
   .container { padding: 0 2rem; }
 
-  /* Nav — show desktop links, hide hamburger */
+  /* Nav — show desktop links, hide hamburger; restore gap */
   .nav__links { display: flex; }
   .nav__cta   { display: inline-flex; }
   .nav__hamburger { display: none; }
   .nav__mobile { display: none !important; }
+  .nav__inner { gap: 2rem; }
 
   /* 2-col layouts */
   .grid-2 { grid-template-columns: 1fr 1fr; gap: 3rem; }
@@ -67,10 +74,6 @@
   .why-block { grid-template-columns: 1fr; gap: 2.5rem; }
   .why-block.reverse { direction: ltr; }
   .why-block.reverse > * { direction: ltr; }
-
-  /* Charter table — scrollable on smaller screens */
-  .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .charter-table { min-width: 600px; }
 
   /* Stats bar: full dividers */
   .stats__item::after {
@@ -124,6 +127,9 @@
 
   /* Contact: side-by-side */
   .contact-grid { grid-template-columns: 1fr 1.6fr; gap: 4rem; }
+
+  /* Parallax hero — desktop only (not supported on mobile browsers) */
+  .hero__bg { background-attachment: fixed; }
 }
 
 /* --------------------------------------------------------------------------
