@@ -1711,7 +1711,14 @@ h1, h2, h3, h4, h5, h6 { line-height: 1.2; font-weight: 700; }
 .team-card__title {
   font-size: 0.8rem;
   color: var(--gold);
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.team-card__bio {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 1.1rem;
 }
 
 .team-card__linkedin {
